@@ -37,12 +37,13 @@
 
 #define INPUT_WIDTH   512
 #define INPUT_HEIGHT  512
-#define OPTIMIZER "None"
-#define LEARNING_RATE 0.0f
+#define OPTIMIZER "RMSprop"
+#define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 8
-#define USE_LSTM false
-#define LSTM_SIZE 32
+#define USE_LSTM true
+#define LSTM_SIZE 16
+// #define LSTM_SIZE 32
 
 /*
 / TODO - Define Reward Parameters
@@ -70,6 +71,16 @@
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
+
+enum armAction {
+  JOINT_0_DEC = 0,
+  JOINT_0_INC = 1,
+  JOINT_1_DEC = 2,
+  JOINT_1_INC = 3,
+  JOINT_2_DEC = 4,
+  JOINT_2_INC = 5,
+  NUM_ACTIONS
+};
 
 
 namespace gazebo
@@ -167,7 +178,9 @@ bool ArmPlugin::createAgent()
 	/
 	*/
 
-	agent = NULL;
+	agent = dqnAgent::Create(INPUT_WIDTH, INPUT_HEIGHT, INPUT_CHANNELS, NUM_ACTIONS,
+    OPTIMIZER, LEARNING_RATE, REPLAY_MEMORY, BATCH_SIZE, GAMMA, EPS_START, EPS_END,
+    EPS_DECAY, USE_LSTM, LSTM_SIZE, ALLOW_RANDOM, DEBUG_DQN);
 
 	if( !agent )
 	{
