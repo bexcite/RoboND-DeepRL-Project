@@ -208,7 +208,7 @@ void ArmPlugin::onCameraMsg(ConstImageStampedPtr &_msg)
 {
 
   if(DEBUG){
-    printf("::onCameraMsg callback: %ux%u", );
+    printf("::onCameraMsg callback");
     if ( _msg ) {
       printf("::onCameraMsg, image_size=%ux%u", _msg->image().width(), _msg->image().height());
     }
