@@ -67,7 +67,7 @@
 #define ANIMATION_STEPS 1000
 
 // Set Debug Mode
-#define DEBUG false
+#define DEBUG true
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
@@ -142,11 +142,11 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	this->j2_controller = new physics::JointController(model);
 
   // Test world stats
-  gazebo::transport::NodePtr node(new gazebo::transport::Node());
-  node->Init();
+  // gazebo::transport::NodePtr node(new gazebo::transport::Node());
+  // node->Init();
 
   // Listen to Gazebo world_stats topic
-  gazebo::transport::SubscriberPtr sub = node->Subscribe("~/world_stats", &ArmPlugin::onStats, this);
+  // gazebo::transport::SubscriberPtr sub = node->Subscribe("~/world_stats", &ArmPlugin::onStats, this);
 
 
 	// Create our node for camera communication
@@ -158,7 +158,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	*/
 
 	cameraSub = cameraNode->Subscribe("/gazebo/arm_world/camera/link/camera/image", &ArmPlugin::onCameraMsg, this);
-  printf("Load:- CameraNode Subscribed!!!!");
+  printf("Load:- CameraNode Subscribed!!!!\n");
 
 	// Create our node for collision detection
 	collisionNode->Init();
@@ -170,7 +170,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 
 	collisionSub = collisionNode->Subscribe("/gazebo/arm_world/tube/tube_link/my_contact", &ArmPlugin::onCollisionMsg, this);
   // /gazebo/arm_world/...
-  printf("Load:- collisionNode Subscribed!!!!");
+  printf("Load:- collisionNode Subscribed!!!!\n");
 
 	// Listen to the update event. This event is broadcast every simulation iteration.
 	// this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&ArmPlugin::OnUpdate, this, _1));
@@ -223,9 +223,9 @@ void ArmPlugin::onCameraMsg(ConstImageStampedPtr &_msg)
 {
 
   if(DEBUG){
-    printf("::onCameraMsg callback");
+    printf("::onCameraMsg callback\n");
     if ( _msg ) {
-      printf("::onCameraMsg, image_size=%ux%u", _msg->image().width(), _msg->image().height());
+      printf("::onCameraMsg, image_size=%ux%u\n", _msg->image().width(), _msg->image().height());
     }
   }
 
@@ -544,6 +544,7 @@ static float BoxDistance(const math::Box& a, const math::Box& b)
 // called by the world update start event
 void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 {
+
 	// deferred loading of the agent (this is to prevent Gazebo black/frozen display)
 	if( !agent && updateInfo.simTime.Float() > 1.5f )
 	{
