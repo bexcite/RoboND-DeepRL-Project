@@ -16,7 +16,7 @@
 #define JOINT_MAX	 2.0f
 
 // Turn on velocity based control
-#define VELOCITY_CONTROL false
+#define VELOCITY_CONTROL true
 #define VELOCITY_MIN -0.2f
 #define VELOCITY_MAX  0.2f
 
@@ -35,8 +35,8 @@
 /
 */
 
-#define INPUT_WIDTH   512
-#define INPUT_HEIGHT  512
+#define INPUT_WIDTH   64
+#define INPUT_HEIGHT  64
 #define OPTIMIZER "RMSprop"
 #define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
@@ -73,12 +73,12 @@
 #define LOCKBASE true
 
 enum armAction {
-  JOINT_0_DEC = 0,
-  JOINT_0_INC = 1,
-  JOINT_1_DEC = 2,
-  JOINT_1_INC = 3,
-  JOINT_2_DEC = 4,
-  JOINT_2_INC = 5,
+  JOINT_0_INC = 0,
+  JOINT_0_DEC = 1,
+  JOINT_1_INC = 2,
+  JOINT_1_DEC = 3,
+  JOINT_2_INC = 4,
+  JOINT_2_DEC = 5,
   NUM_ACTIONS
 };
 
@@ -173,7 +173,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
   printf("Load:- collisionNode Subscribed!!!!\n");
 
 	// Listen to the update event. This event is broadcast every simulation iteration.
-	// this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&ArmPlugin::OnUpdate, this, _1));
+	this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&ArmPlugin::OnUpdate, this, _1));
 }
 
 
@@ -361,6 +361,12 @@ bool ArmPlugin::updateAgent()
 
 	float velocity = 0.0; // TODO - Set joint velocity based on whether action is even or odd.
 
+  if (action % 2) {
+    velocity = actionVelDelta;
+  } else {
+    velocity = - actionVelDelta;
+  }
+
 	if( velocity < VELOCITY_MIN )
 		velocity = VELOCITY_MIN;
 
@@ -391,6 +397,12 @@ bool ArmPlugin::updateAgent()
 	/
 	*/
 	float joint = 0.0; // TODO - Set joint position based on whether action is even or odd.
+
+  if (action % 2) {
+    joint = actionJointDelta;
+  } else {
+    joint = - actionJointDelta;
+  }
 
 	// limit the joint to the specified range
 	if( joint < JOINT_MIN )
