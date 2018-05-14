@@ -149,7 +149,7 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	/
 	*/
 
-	cameraSub = cameraNode->Subscribe("~/camera/link/camera/image", &ArmPlugin::onCameraMsg, this);
+	cameraSub = cameraNode->Subscribe("/gazebo/arm_world/camera/link/camera/image", &ArmPlugin::onCameraMsg, this);
   printf("Load:- CameraNode Subscribed!!!!");
 
 	// Create our node for collision detection
@@ -160,8 +160,9 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	/
 	*/
 
-	collisionSub = collisionNode->Subscribe("~/tube/tube_link/my_contact", &ArmPlugin::onCollisionMsg, this);
+	collisionSub = collisionNode->Subscribe("/gazebo/arm_world/tube/tube_link/my_contact", &ArmPlugin::onCollisionMsg, this);
   // /gazebo/arm_world/...
+  printf("Load:- collisionNode Subscribed!!!!");
 
 	// Listen to the update event. This event is broadcast every simulation iteration.
 	// this->updateConnection = event::Events::ConnectWorldUpdateBegin(boost::bind(&ArmPlugin::OnUpdate, this, _1));
