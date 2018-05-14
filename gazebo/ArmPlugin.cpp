@@ -214,7 +214,7 @@ bool ArmPlugin::createAgent()
 
 
 void ArmPlugin::onStats(ConstWorldStatisticsPtr &_msg) {
-    printf(_msg->DebugString());
+    printf(_msg->DebugString().c_str());
 }
 
 
