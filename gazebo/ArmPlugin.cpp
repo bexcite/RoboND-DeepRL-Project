@@ -141,6 +141,14 @@ void ArmPlugin::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 	this->model = _parent;
 	this->j2_controller = new physics::JointController(model);
 
+  // Test world stats
+  gazebo::transport::NodePtr node(new gazebo::transport::Node());
+  node->Init();
+
+  // Listen to Gazebo world_stats topic
+  gazebo::transport::SubscriberPtr sub = node->Subscribe("~/world_stats", &ArmPlugin::onStats, this);
+
+
 	// Create our node for camera communication
 	cameraNode->Init();
 
@@ -204,6 +212,10 @@ bool ArmPlugin::createAgent()
 	return true;
 }
 
+
+void ArmPlugin::onStats(ConstWorldStatisticsPtr &_msg) {
+    printf(_msg->DebugString());
+}
 
 
 // onCameraMsg
