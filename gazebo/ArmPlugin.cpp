@@ -630,7 +630,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
     std::cout << "gripBBox = " << gripBBox << std::endl;
     printf("Box min.z = %f\n", gripBBox.min.z);
 
-    bool checkGroundContace = gripBBox.min.z < groundContact;
+    bool checkGroundContact = gripBBox.min.z < groundContact;
 
 
 		if(checkGroundContact)
