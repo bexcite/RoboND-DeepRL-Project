@@ -280,7 +280,7 @@ void ArmPlugin::onCameraMsg(ConstImageStampedPtr &_msg)
 // onCollisionMsg
 void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 {
-	if(DEBUG){printf("collision callback (%u contacts)\n", contacts->contact_size());}
+	// if(DEBUG){printf("collision callback (%u contacts)\n", contacts->contact_size());}
 
 	if( testAnimation )
 		return;
@@ -628,7 +628,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		*/
 
     std::cout << "gripBBox = " << gripBBox << std::endl;
-    printf("Box min.z = %i", gripBBox.min.z);
+    printf("Box min.z = %f\n", gripBBox.min.z);
 
 		/*if(checkGroundContact)
 		{
