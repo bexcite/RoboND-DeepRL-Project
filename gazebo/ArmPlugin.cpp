@@ -630,16 +630,19 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
     std::cout << "gripBBox = " << gripBBox << std::endl;
     printf("Box min.z = %f\n", gripBBox.min.z);
 
-		/*if(checkGroundContact)
+    bool checkGroundContace = gripBBox.min.z < groundContact;
+
+
+		if(checkGroundContact)
 		{
 
-			if(DEBUG){printf("GROUND CONTACT, EOE\n");}
+			if(DEBUG){printf(">>>>>> GROUND CONTACT, EOE\n");}
 
-			rewardHistory = None;
-			newReward     = None;
-			endEpisode    = None;
+			rewardHistory = REWARD_LOSS;
+			newReward     = true;
+			endEpisode    = true;
 		}
-		*/
+
 
 		/*
 		/ TODO - Issue an interim reward based on the distance to the object
