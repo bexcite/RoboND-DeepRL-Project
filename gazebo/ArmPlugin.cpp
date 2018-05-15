@@ -50,8 +50,8 @@
 /
 */
 
-#define REWARD_WIN  0.0f
-#define REWARD_LOSS -0.0f
+#define REWARD_WIN  10.0f
+#define REWARD_LOSS -10.0f
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
@@ -627,6 +627,8 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
+    std::cout << "gripBBox = " << gripBBox << std::endl;
+    printf("Box min.z = %i", gripBBox.min.z);
 
 		/*if(checkGroundContact)
 		{
