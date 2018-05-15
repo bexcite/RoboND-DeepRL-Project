@@ -69,7 +69,7 @@
 #define ANIMATION_STEPS 1000
 
 // Set Debug Mode
-#define DEBUG true
+#define DEBUG false
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
@@ -629,8 +629,8 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
-    std::cout << "gripBBox = " << gripBBox << std::endl;
-    printf("Box min.z = %f\n", gripBBox.min.z);
+    // std::cout << "gripBBox = " << gripBBox << std::endl;
+    // printf("Box min.z = %f\n", gripBBox.min.z);
 
     bool checkGroundContact = gripBBox.min.z < groundContact;
 
