@@ -53,6 +53,8 @@
 #define REWARD_WIN  10.0f
 #define REWARD_LOSS -10.0f
 
+#define REWARD_ALPHA 0.9f
+
 // Define Object Names
 #define WORLD_NAME "arm_world"
 #define PROP_NAME  "tube"
@@ -632,7 +634,6 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
     bool checkGroundContact = gripBBox.min.z < groundContact;
 
-
 		if(checkGroundContact)
 		{
 
@@ -649,10 +650,10 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		/
 		*/
 
-		/*
+
 		if(!checkGroundContact)
 		{
-			const float distGoal = 0; // compute the reward from distance to the goal
+			const float distGoal = ArmPlugin::BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 
 			if(DEBUG){printf("distance('%s', '%s') = %f\n", gripper->GetName().c_str(), prop->model->GetName().c_str(), distGoal);}
 
@@ -662,13 +663,13 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				const float distDelta  = lastGoalDistance - distGoal;
 
 				// compute the smoothed moving average of the delta of the distance to the goal
-				avgGoalDelta  = 0.0;
-				rewardHistory = None;
-				newReward     = None;
+				avgGoalDelta  = avgGoalDelta * REWARD_ALPHA + distDelta * (1 - REWARD_ALPHA);
+				rewardHistory = 2 * avgGoalDelta; // TODO: tweak this more
+				newReward     = true;
 			}
 
 			lastGoalDistance = distGoal;
-		} */
+		}
 	}
 
 	// issue rewards and train DQN
