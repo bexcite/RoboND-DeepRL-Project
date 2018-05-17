@@ -224,12 +224,12 @@ void ArmPlugin::onStats(ConstWorldStatisticsPtr &_msg) {
 void ArmPlugin::onCameraMsg(ConstImageStampedPtr &_msg)
 {
 
-  if(DEBUG){
-    printf("::onCameraMsg callback\n");
-    if ( _msg ) {
-      printf("::onCameraMsg, image_size=%ux%u\n", _msg->image().width(), _msg->image().height());
-    }
-  }
+  // if(DEBUG){
+  //   printf("::onCameraMsg callback\n");
+  //   if ( _msg ) {
+  //     printf("::onCameraMsg, image_size=%ux%u\n", _msg->image().width(), _msg->image().height());
+  //   }
+  // }
 
 	// don't process the image if the agent hasn't been created yet
 	if( !agent )
@@ -274,7 +274,7 @@ void ArmPlugin::onCameraMsg(ConstImageStampedPtr &_msg)
 	memcpy(inputBuffer[0], _msg->image().data().c_str(), inputBufferSize);
 	newState = true;
 
-	if(DEBUG){printf("camera %i x %i  %i bpp  %i bytes\n", width, height, bpp, size);}
+	// if(DEBUG){printf("camera %i x %i  %i bpp  %i bytes\n", width, height, bpp, size);}
 
 }
 
@@ -655,7 +655,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 		{
 			const float distGoal = BoxDistance(gripBBox, propBBox); // compute the reward from distance to the goal
 
-			if(DEBUG){printf("distance('%s', '%s') = %f\n", gripper->GetName().c_str(), prop->model->GetName().c_str(), distGoal);}
+			// if(DEBUG){printf("distance('%s', '%s') = %f\n", gripper->GetName().c_str(), prop->model->GetName().c_str(), distGoal);}
 
 
 			if( episodeFrames > 1 )
