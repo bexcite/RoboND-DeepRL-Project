@@ -64,12 +64,14 @@
 #define COLLISION_FILTER "ground_plane::link::collision"
 #define COLLISION_ITEM   "tube::tube_link::tube_collision"
 #define COLLISION_POINT  "arm::gripperbase::gripper_link"
+#define COLLISION_LINK2  "arm::link2::collision2"
+#define COLLISION_GRIPPER_MIDDLE  "arm::gripper_middle::middle_collision"
 
 // Animation Steps
 #define ANIMATION_STEPS 1000
 
 // Set Debug Mode
-#define DEBUG true
+#define DEBUG false
 
 // Lock base rotation DOF (Add dof in header file if off)
 #define LOCKBASE true
@@ -301,18 +303,27 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 		/
 		*/
 
-		/*
+
+    bool collisionCheck;
+
+    collisionCheck = true; // Any touch of the tube by the arm
+
+    // Collision by gripper only
+    // if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
+    //   collisionCheck = true;
+    // }
+
 
 		if (collisionCheck)
 		{
-			rewardHistory = None;
+			rewardHistory = REWARD_WIN;
 
-			newReward  = None;
-			endEpisode = None;
+			newReward  = true;
+			endEpisode = true;
 
 			return;
 		}
-		*/
+
 
 	}
 }
