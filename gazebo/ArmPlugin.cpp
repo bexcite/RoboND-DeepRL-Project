@@ -16,9 +16,9 @@
 #define JOINT_MAX	 2.0f
 
 // Turn on velocity based control
-#define VELOCITY_CONTROL false
-#define VELOCITY_MIN -0.2f
-#define VELOCITY_MAX  0.2f
+#define VELOCITY_CONTROL true
+#define VELOCITY_MIN -0.3f
+#define VELOCITY_MAX  0.3f
 
 // Define DQN API Settings
 
