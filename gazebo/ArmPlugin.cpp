@@ -51,7 +51,7 @@
 */
 
 #define REWARD_WIN  20.0f
-#define REWARD_LOSS -10.0f
+#define REWARD_LOSS -20.0f // -10.0f - forks for task 1
 
 #define REWARD_ALPHA 0.5f
 
