@@ -40,7 +40,7 @@
 #define OPTIMIZER "RMSprop"
 #define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
-#define BATCH_SIZE 16
+#define BATCH_SIZE 8
 #define USE_LSTM true
 #define LSTM_SIZE 16
 // #define LSTM_SIZE 32
@@ -53,7 +53,7 @@
 #define REWARD_WIN  100.0f // 40 works so so; 20 for task #1
 #define REWARD_LOSS -20.0f // -10.0f - forks for task 1
 
-#define REWARD_ALPHA 0.5f
+#define REWARD_ALPHA 0.9f
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
