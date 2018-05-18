@@ -317,7 +317,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
       // std::cout << "Collision between[" << contacts->contact(i).collision1()
   		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
     } else {
-      rewardHistory = REWARD_LOSS/2;
+      rewardHistory = REWARD_WIN/10;
 
 			newReward  = true;
 			endEpisode = true;
