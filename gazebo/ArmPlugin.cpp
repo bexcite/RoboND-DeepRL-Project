@@ -294,7 +294,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 		if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_FILTER) == 0 )
 			continue;
 
-		if(DEBUG){std::cout << "Collision between[" << contacts->contact(i).collision1()
+		if(/*DEBUG*/true){std::cout << "Collision between[" << contacts->contact(i).collision1()
 			     << "] and [" << contacts->contact(i).collision2() << "]\n";}
 
 
@@ -312,8 +312,13 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
     collisionCheck = false;
     if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
       collisionCheck = true;
-      std::cout << "Collision between[" << contacts->contact(i).collision1()
-  			     << "] and [" << contacts->contact(i).collision2() << "]\n";
+      // std::cout << "Collision between[" << contacts->contact(i).collision1()
+  		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
+    } else {
+      rewardHistory = REWARD_LOSS;
+
+			newReward  = true;
+			endEpisode = true;
     }
 
 
