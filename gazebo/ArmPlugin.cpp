@@ -306,12 +306,15 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 
     bool collisionCheck;
 
-    collisionCheck = true; // Any touch of the tube by the arm
+    // collisionCheck = true; // Any touch of the tube by the arm
 
     // Collision by gripper only
-    // if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
-    //   collisionCheck = true;
-    // }
+    collisionCheck = false;
+    if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
+      collisionCheck = true;
+      std::cout << "Collision between[" << contacts->contact(i).collision1()
+  			     << "] and [" << contacts->contact(i).collision2() << "]\n";
+    }
 
 
 		if (collisionCheck)
