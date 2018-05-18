@@ -317,7 +317,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
       // std::cout << "Collision between[" << contacts->contact(i).collision1()
   		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
     } else {
-      rewardHistory = REWARD_WIN/100;
+      rewardHistory = REWARD_WIN/10;
 
 			newReward  = true;
 			endEpisode = true;
@@ -685,8 +685,8 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				// compute the smoothed moving average of the delta of the distance to the goal
 				avgGoalDelta  = avgGoalDelta * REWARD_ALPHA + distDelta * (1 - REWARD_ALPHA);
-				rewardHistory = 2 * avgGoalDelta - 0.05; // this works for Task #1
-        rewardHistory = 2 * avgGoalDelta - 0.2; // Task #2 experiments
+				// rewardHistory = 2 * avgGoalDelta - 0.05; // this works for Task #1
+        rewardHistory = 4 * avgGoalDelta - 0.2; // Task #2 experiments
 				newReward     = true;
 			}
 
