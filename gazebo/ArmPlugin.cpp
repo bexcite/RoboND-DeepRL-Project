@@ -24,7 +24,7 @@
 
 #define INPUT_CHANNELS 3
 #define ALLOW_RANDOM true
-#define DEBUG_DQN false
+#define DEBUG_DQN true
 #define GAMMA 0.9f
 #define EPS_START 0.9f
 #define EPS_END 0.05f
