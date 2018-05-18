@@ -50,10 +50,10 @@
 /
 */
 
-#define REWARD_WIN  10.0f
-#define REWARD_LOSS -10.0f
+#define REWARD_WIN  2.0f
+#define REWARD_LOSS -1.0f
 
-#define REWARD_ALPHA 0.9f
+#define REWARD_ALPHA 0.5f
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
@@ -686,7 +686,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 	// issue rewards and train DQN
 	if( newReward && agent != NULL )
 	{
-		if(DEBUG){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
+		if(/*DEBUG*/true){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
 		agent->NextReward(rewardHistory, endEpisode);
 
 		// reset reward indicator
