@@ -684,14 +684,13 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 			if( episodeFrames > 1 )
 			{
-				//const float distDelta  = lastGoalDistance - distGoal;
-        const float distDelta = distGoal - lastGoalDistance;
+				const float distDelta  = lastGoalDistance - distGoal;
+        // const float distDelta = distGoal - lastGoalDistance;
 
 				// compute the smoothed moving average of the delta of the distance to the goal
 				avgGoalDelta  = avgGoalDelta * REWARD_ALPHA + distDelta * (1 - REWARD_ALPHA);
 				// rewardHistory = 2 * avgGoalDelta - 0.05; // this works for Task #1 (TO CHECK)
-        //rewardHistory = 4 * avgGoalDelta - 0.2; // Task #2 experiments 0.2
-        rewardHistory = lastGoalDistance + avgGoalDelta; // smoothing distance change
+        rewardHistory = 0.3 * avgGoalDelta; // Task #2 experiments 0.2
 				newReward     = true;
 			}
 
