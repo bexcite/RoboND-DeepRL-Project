@@ -17,8 +17,8 @@
 
 // Turn on velocity based control
 #define VELOCITY_CONTROL true
-#define VELOCITY_MIN -0.3f
-#define VELOCITY_MAX  0.3f
+#define VELOCITY_MIN -0.2f
+#define VELOCITY_MAX  0.2f
 
 // Define DQN API Settings
 
@@ -38,7 +38,7 @@
 #define INPUT_WIDTH   64
 #define INPUT_HEIGHT  64
 #define OPTIMIZER "RMSprop"
-#define LEARNING_RATE 0.01f
+#define LEARNING_RATE 0.05f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 8
 #define USE_LSTM true
