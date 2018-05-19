@@ -185,7 +185,7 @@ class ReplayMemory(object):
 #
 # .. math::
 #
-#    \mathcal{L} = \frac{1}{|B|}\sum_{(s, a, s', r) \ \in \ B} \mathcal{L}(\delta) 
+#    \mathcal{L} = \frac{1}{|B|}\sum_{(s, a, s', r) \ \in \ B} \mathcal{L}(\delta)
 #
 # .. math::
 #
@@ -216,7 +216,7 @@ class DQN(nn.Module):
 		self.bn2 = nn.BatchNorm2d(32)
 		self.conv3 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
 		self.bn3 = nn.BatchNorm2d(32)
-		
+
 		#if input_width >= 128 and input_height >= 128:
 		#	self.conv4 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
 		#	self.bn4 = nn.BatchNorm2d(32)
@@ -276,7 +276,7 @@ class DRQN(nn.Module):
 		if self.lstm is None:
 			print('[deepRL]  nn.Conv2d() output size = ' + str(y.size(1)))
 			self.lstm = nn.LSTMCell(y.size(1), lstm_size)
-	
+
 			if use_cuda:
 				self.lstm.cuda()
 
@@ -380,6 +380,7 @@ def select_action(state, allow_rand):
 	eps_threshold = epsilon_end + (epsilon_start - epsilon_end) * \
 		math.exp(-1. * steps_done / epsilon_decay)
 	steps_done += 1
+	print('[deepRL]  steps_done = ', steps_done)
 	if not allow_rand or sample > eps_threshold:
 		if use_lstm:
 			action, (lstm_actor_hx, lstm_actor_cx) = model(
@@ -391,7 +392,7 @@ def select_action(state, allow_rand):
 		#print('select_action = ' + str(action))
 		return action
 	else:
-#		print('[deepRL]  DQN selected exploratory random action')
+		print('[deepRL]  DQN selected exploratory random action')
 		return LongTensor([[random.randrange(num_actions)]])
 
 episode_durations = []
@@ -514,7 +515,7 @@ def next_action(state_in):
 	#print('state = ' + str(state.size()))
 	state = state_in.clone().unsqueeze(0)
 	#print('state = ' + str(state.size()))
-	
+
 	if curr_state is not None:
 		last_state = curr_state.clone()
 
@@ -529,7 +530,7 @@ def next_action(state_in):
 		curr_diff = state - last_state
 		#print('curr_diff = ' + str(curr_diff.abs().sum()) + ' ' + str(curr_diff.max()) + ' ' + str(curr_diff.min()))
 		#last_action = select_action(curr_diff, allow_random)
-		
+
 	#else:
 	#	curr_state = None
 	#	curr_diff = None
@@ -554,8 +555,8 @@ def next_reward(reward, end_episode):
 
 	#print('reward = ' + str(reward))
 	reward = Tensor([reward])
-	
-	if last_diff is not None and curr_diff is not None and last_action is not None:	
+
+	if last_diff is not None and curr_diff is not None and last_action is not None:
 		# store the transition in memory
 		#memory.push(last_diff, last_action, curr_diff, reward)
 		memory.push(last_state, last_action, curr_state, reward)
@@ -575,5 +576,3 @@ def next_reward(reward, end_episode):
 
 		if use_lstm:
 			lstm_actor_hx, lstm_actor_cx = model.reset_states(lstm_actor_hx, lstm_actor_cx)
-
-
