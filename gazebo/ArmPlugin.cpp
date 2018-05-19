@@ -28,7 +28,7 @@
 #define GAMMA 0.9f
 #define EPS_START 0.95f
 #define EPS_END 0.02f
-#define EPS_DECAY 100 //200
+#define EPS_DECAY 200 //200
 
 /*
 / TODO - Tune the following hyperparameters
