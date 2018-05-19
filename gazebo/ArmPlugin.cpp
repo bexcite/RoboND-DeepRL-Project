@@ -28,7 +28,7 @@
 #define GAMMA 0.9f
 #define EPS_START 0.9f
 #define EPS_END 0.05f
-#define EPS_DECAY 500 //200
+#define EPS_DECAY 200 //200
 
 /*
 / TODO - Tune the following hyperparameters
@@ -38,7 +38,7 @@
 #define INPUT_WIDTH   64
 #define INPUT_HEIGHT  64
 // #define OPTIMIZER "RMSprop"
-#define OPTIMIZER "RMSprop"
+#define OPTIMIZER "Adam"
 #define LEARNING_RATE 0.01f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 32
@@ -54,7 +54,7 @@
 #define REWARD_WIN  20.0f // 40 works so so; 20 for task #1 / 100.f
 #define REWARD_LOSS -20.0f // -10.0f - forks for task 1 / -20.f
 
-#define REWARD_ALPHA 0.2f
+#define REWARD_ALPHA 0.5f
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
