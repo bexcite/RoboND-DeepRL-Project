@@ -733,7 +733,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			avgGoalDelta     = 0.0f;
 
 			// track the number of wins and agent accuracy
-      printf("runs = %03u", totalRuns % GAME_HISTORY);
+      printf("runs = %03u\n", totalRuns % GAME_HISTORY);
 			if( rewardHistory >= REWARD_WIN ) {
 				successfulGrabs++;
         history[totalRuns % GAME_HISTORY] = true;
@@ -743,7 +743,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
       // count wins in the local history. Size of GAME_HISTORY
       int localAccuracyCnt = 0;
-      int actualHistorySize = totalRuns > GAME_HISTORY ? GAME_HISTORY : totalRuns;
+      int actualHistorySize = (totalRuns + 1) > GAME_HISTORY ? GAME_HISTORY : (totalRuns + 1);
       for (int i = 0; i < actualHistorySize; ++i) {
         if (history[i]) {
           localAccuracyCnt++;
