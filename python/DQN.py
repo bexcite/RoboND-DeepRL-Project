@@ -380,7 +380,9 @@ def select_action(state, allow_rand):
 	eps_threshold = epsilon_end + (epsilon_start - epsilon_end) * \
 		math.exp(-1. * steps_done / epsilon_decay)
 	steps_done += 1
-	print('[deepRL]  steps_done = ', steps_done)
+
+	if steps_done % 100 == 0:
+		print('[deepRL]  steps_done = ', steps_done, ', eps_threshold = ', eps_threshold)
 	if not allow_rand or sample > eps_threshold:
 		if use_lstm:
 			action, (lstm_actor_hx, lstm_actor_cx) = model(
