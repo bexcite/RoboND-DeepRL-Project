@@ -16,7 +16,7 @@
 #define JOINT_MAX	 2.0f
 
 // Turn on velocity based control
-#define VELOCITY_CONTROL true
+#define VELOCITY_CONTROL false
 #define VELOCITY_MIN -0.2f
 #define VELOCITY_MAX  0.2f
 
@@ -26,8 +26,8 @@
 #define ALLOW_RANDOM true
 #define DEBUG_DQN false
 #define GAMMA 0.9f
-#define EPS_START 0.95f
-#define EPS_END 0.02f
+#define EPS_START 0.9f
+#define EPS_END 0.05f
 #define EPS_DECAY 200 //200
 
 /*
