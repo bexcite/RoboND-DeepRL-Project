@@ -394,7 +394,7 @@ def select_action(state, allow_rand):
 		#print('select_action = ' + str(action))
 		return action
 	else:
-		print('[deepRL]  DQN selected exploratory random action')
+		# print('[deepRL]  DQN selected exploratory random action')
 		return LongTensor([[random.randrange(num_actions)]])
 
 episode_durations = []
