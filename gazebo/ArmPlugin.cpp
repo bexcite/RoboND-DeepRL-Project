@@ -74,17 +74,21 @@
 #define DEBUG false
 
 // Lock base rotation DOF (Add dof in header file if off)
-#define LOCKBASE false
+#define LOCKBASE true
+
 
 enum armAction {
   JOINT_0_INC = 0,
   JOINT_0_DEC = 1,
   JOINT_1_INC = 2,
   JOINT_1_DEC = 3,
-  JOINT_2_INC = 4,
-  JOINT_2_DEC = 5,
+  // JOINT_2_INC = 4,
+  // JOINT_2_DEC = 5,
   NUM_ACTIONS
 };
+
+
+
 
 
 namespace gazebo
