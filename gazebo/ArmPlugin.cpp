@@ -733,6 +733,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			avgGoalDelta     = 0.0f;
 
 			// track the number of wins and agent accuracy
+      printf("runs = %03u", totalRuns % GAME_HISTORY);
 			if( rewardHistory >= REWARD_WIN ) {
 				successfulGrabs++;
         history[totalRuns % GAME_HISTORY] = true;
