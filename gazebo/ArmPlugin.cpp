@@ -53,7 +53,7 @@
 #define REWARD_WIN  20.0f // 40 works so so; 20 for task #1 / 100.f
 #define REWARD_LOSS -20.0f // -10.0f - forks for task 1 / -20.f
 
-#define REWARD_ALPHA 0.8f
+#define REWARD_ALPHA 0.2f
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
