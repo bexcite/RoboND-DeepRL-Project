@@ -42,7 +42,7 @@
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 32
 #define USE_LSTM true
-#define LSTM_SIZE 512
+#define LSTM_SIZE 256
 // #define LSTM_SIZE 32
 
 /*
@@ -51,7 +51,7 @@
 */
 
 #define REWARD_WIN  2.0f // 40 works so so; 20 for task #1 / 100.f
-#define REWARD_LOSS -1.0f // -10.0f - forks for task 1 / -20.f
+#define REWARD_LOSS -2.0f // -10.0f - forks for task 1 / -20.f
 
 #define REWARD_ALPHA 0.8f
 
@@ -701,7 +701,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 	// issue rewards and train DQN
 	if( newReward && agent != NULL )
 	{
-		if(/*DEBUG*/true){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
+		if(DEBUG){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
 		agent->NextReward(rewardHistory, endEpisode);
 
 		// reset reward indicator
