@@ -89,6 +89,11 @@ enum armAction {
 };
 
 
+#define GAME_HISTORY 30
+
+bool history[GAME_HISTORY];
+
+
 
 
 
@@ -728,11 +733,25 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			avgGoalDelta     = 0.0f;
 
 			// track the number of wins and agent accuracy
-			if( rewardHistory >= REWARD_WIN )
+			if( rewardHistory >= REWARD_WIN ) {
 				successfulGrabs++;
+        history[totalRuns % GAME_HISTORY] = true;
+      }
+
+      history[totalRuns % GAME_HISTORY] = false;
+
+      // count wins in the local history. Size of GAME_HISTORY
+      int localAccuracyCnt = 0;
+      int actualHistorySize = totalRuns > GAME_HISTORY ? GAME_HISTORY : totalRuns;
+      for (int i = 0; i < actualHistorySize; ++i) {
+        if (history[i]) {
+          localAccuracyCnt++;
+        }
+      }
 
 			totalRuns++;
 			printf("Current Accuracy:  %0.4f (%03u of %03u)  (reward=%+0.2f %s)\n", float(successfulGrabs)/float(totalRuns), successfulGrabs, totalRuns, rewardHistory, (rewardHistory >= REWARD_WIN ? "WIN" : "LOSS"));
+      printf("Local Accuracy: %0.4f (%03u of %03u)\n", float(localAccuracyCnt/actualHistorySize), localAccuracyCnt, actualHistorySize);
 
 
 			for( uint32_t n=0; n < DOF; n++ )
