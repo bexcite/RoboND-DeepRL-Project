@@ -381,7 +381,7 @@ def select_action(state, allow_rand):
 		math.exp(-1. * steps_done / epsilon_decay)
 	steps_done += 1
 
-	if steps_done % 100 == 0:
+	# if steps_done % 100 == 0:
 		# print('[deepRL]  steps_done = ', steps_done, ', eps_threshold = ', eps_threshold)
 	if not allow_rand or sample > eps_threshold:
 		if use_lstm:
