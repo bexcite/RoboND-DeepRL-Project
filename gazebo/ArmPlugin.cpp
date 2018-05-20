@@ -716,7 +716,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 	// issue rewards and train DQN
 	if( newReward && agent != NULL )
 	{
-		if(/*DEBUG*/true){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
+		if(DEBUG){printf("ArmPlugin - issuing reward %f, EOE=%s  %s\n", rewardHistory, endEpisode ? "true" : "false", (rewardHistory > 0.1f) ? "POS+" :(rewardHistory > 0.0f) ? "POS" : (rewardHistory < 0.0f) ? "    NEG" : "       ZERO");}
 		agent->NextReward(rewardHistory, endEpisode);
 
 		// reset reward indicator
@@ -747,7 +747,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
       // count wins in the local history. Size of GAME_HISTORY
       int localAccuracyCnt = 0;
       int actualHistorySize = (totalRuns + 1) > GAME_HISTORY ? GAME_HISTORY : (totalRuns + 1);
-      printf("actualHistorySize = %03u\n", actualHistorySize);
+      printf("actualHistorySize = %u\n", actualHistorySize);
       for (int i = 0; i < actualHistorySize; ++i) {
         if (history[i]) {
           localAccuracyCnt++;
