@@ -318,13 +318,17 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
     bool collisionCheck = false;
 
 
+    std::cout << "Collision between[" << contacts->contact(i).collision1()
+    	     << "] and [" << contacts->contact(i).collision2() << "]\n";
+
+
 #if TASK_ID == 1
 
       // Task #1 (if only this)
 
       printf("TASK_ID == 1 ");
 
-      if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM)) {
+      if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0) {
         collisionCheck = true; // Any touch of the tube by the arm
         printf("-> COLLISION!");
       }
@@ -338,11 +342,8 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 
     printf("TASK_ID == 2 ");
 
-    std::cout << "Collision between[" << contacts->contact(i).collision1()
-    	     << "] and [" << contacts->contact(i).collision2() << "]\n";
-
     // collisionCheck = false;
-    if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM)) {
+    if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0) {
       if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
         // Collision with the gripper base
         collisionCheck = true;
