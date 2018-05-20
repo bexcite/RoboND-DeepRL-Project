@@ -382,7 +382,7 @@ def select_action(state, allow_rand):
 	steps_done += 1
 
 	if steps_done % 100 == 0:
-		print('[deepRL]  steps_done = ', steps_done, ', eps_threshold = ', eps_threshold)
+		# print('[deepRL]  steps_done = ', steps_done, ', eps_threshold = ', eps_threshold)
 	if not allow_rand or sample > eps_threshold:
 		if use_lstm:
 			action, (lstm_actor_hx, lstm_actor_cx) = model(
