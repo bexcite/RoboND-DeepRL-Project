@@ -39,7 +39,7 @@
 #define INPUT_HEIGHT  64
 #define OPTIMIZER "RMSprop"
 // #define OPTIMIZER "Adam"
-#define LEARNING_RATE 0.01f
+#define LEARNING_RATE 0.1f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 32
 #define USE_LSTM true
@@ -733,25 +733,25 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			avgGoalDelta     = 0.0f;
 
 			// track the number of wins and agent accuracy
-      printf("runsId = %03u\n", totalRuns % GAME_HISTORY);
+      // printf("runsId = %03u\n", totalRuns % GAME_HISTORY);
 			if( rewardHistory >= REWARD_WIN ) {
 				successfulGrabs++;
         history[totalRuns % GAME_HISTORY] = true;
-        printf("history[%u]=true\n", totalRuns % GAME_HISTORY);
+        // printf("history[%u]=true\n", totalRuns % GAME_HISTORY);
       } else {
         history[totalRuns % GAME_HISTORY] = false;
-        printf("history[%u]=false\n", totalRuns % GAME_HISTORY);
+        // printf("history[%u]=false\n", totalRuns % GAME_HISTORY);
       }
 
 
       // count wins in the local history. Size of GAME_HISTORY
       int localAccuracyCnt = 0;
       int actualHistorySize = (totalRuns + 1) > GAME_HISTORY ? GAME_HISTORY : (totalRuns + 1);
-      printf("actualHistorySize = %u\n", actualHistorySize);
+      // printf("actualHistorySize = %u\n", actualHistorySize);
       for (int i = 0; i < actualHistorySize; ++i) {
         if (history[i]) {
           localAccuracyCnt++;
-          printf("- BINGO");
+          // printf("- BINGO");
         }
       }
       printf("\n");
