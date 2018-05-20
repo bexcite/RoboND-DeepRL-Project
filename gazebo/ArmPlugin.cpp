@@ -395,12 +395,12 @@ bool ArmPlugin::updateAgent()
 	/
 	*/
 
-	float velocity = 0.0; // TODO - Set joint velocity based on whether action is even or odd.
+	float velocity = vel[action/2]; // TODO - Set joint velocity based on whether action is even or odd.
 
   if (action % 2) {
-    velocity = actionVelDelta;
+    velocity += actionVelDelta;
   } else {
-    velocity = - actionVelDelta;
+    velocity -= actionVelDelta;
   }
 
 	if( velocity < VELOCITY_MIN )
@@ -432,12 +432,12 @@ bool ArmPlugin::updateAgent()
 	/ TODO - Increase or decrease the joint position based on whether the action is even or odd
 	/
 	*/
-	float joint = 0.0; // TODO - Set joint position based on whether action is even or odd.
+	float joint = ref[action/2]; // TODO - Set joint position based on whether action is even or odd.
 
   if (action % 2) {
-    joint = actionJointDelta;
+    joint += actionJointDelta;
   } else {
-    joint = - actionJointDelta;
+    joint -= actionJointDelta;
   }
 
 	// limit the joint to the specified range
@@ -737,9 +737,12 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 			if( rewardHistory >= REWARD_WIN ) {
 				successfulGrabs++;
         history[totalRuns % GAME_HISTORY] = true;
+        printf("history[%u]=true", totalRuns % GAME_HISTORY);
+      } else {
+        history[totalRuns % GAME_HISTORY] = false;
+        printf("history[%u]=false", totalRuns % GAME_HISTORY);
       }
 
-      history[totalRuns % GAME_HISTORY] = false;
 
       // count wins in the local history. Size of GAME_HISTORY
       int localAccuracyCnt = 0;
