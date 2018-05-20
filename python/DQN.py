@@ -489,7 +489,7 @@ def optimize_model():
 		param.grad.data.clamp_(-1, 1)
 	optimizer.step()
 
-	print("[deepRL] Optimization step: len = ", len(transitions))
+	# print("[deepRL] Optimization step: len = ", len(transitions))
 
 
 ######################################################################
