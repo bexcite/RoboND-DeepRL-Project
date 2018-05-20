@@ -55,6 +55,7 @@
 #define REWARD_LOSS -20.0f // -10.0f - forks for task 1 / -20.f
 
 #define REWARD_ALPHA 0.5f
+#define TASK_ID 1 // 1 or 2
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
@@ -314,32 +315,52 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 		*/
 
 
-    bool collisionCheck;
+    bool collisionCheck = false;
 
-    // Task #1
-    collisionCheck = true; // Any touch of the tube by the arm
+
+#if TASK_ID == 1
+
+      // Task #1 (if only this)
+
+      printf("TASK_ID == 1 ");
+
+      if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM)) {
+        collisionCheck = true; // Any touch of the tube by the arm
+        printf("-> COLLISION!");
+      }
+
+      printf("\n");
+
+#elif TASK_ID == 2
 
     // Task #2
-
     // Collision by gripper only
-    /*
-    collisionCheck = false;
-    if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
-      // Collision with the gripper base
-      collisionCheck = true;
-      // std::cout << "Collision between[" << contacts->contact(i).collision1()
-  		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
-    } else {
-      // Collision with other part of the arm so - finish episode and issue the loss
-      // rewardHistory = REWARD_WIN/10;
-      rewardHistory = REWARD_LOSS;
 
-			newReward  = true;
-			endEpisode = true;
+    printf("TASK_ID == 2 ");
 
-      return;
+    std::cout << "Collision between[" << contacts->contact(i).collision1()
+    	     << "] and [" << contacts->contact(i).collision2() << "]\n";
+
+    // collisionCheck = false;
+    if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM)) {
+      if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
+        // Collision with the gripper base
+        collisionCheck = true;
+        // std::cout << "Collision between[" << contacts->contact(i).collision1()
+    		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
+      } else {
+        // Collision with other part of the arm so - finish episode and issue the loss
+        // rewardHistory = REWARD_WIN/10;
+        rewardHistory = REWARD_LOSS;
+
+  			newReward  = true;
+  			endEpisode = true;
+
+        return;
+      }
     }
-    */
+
+#endif
 
 
 		if (collisionCheck)
