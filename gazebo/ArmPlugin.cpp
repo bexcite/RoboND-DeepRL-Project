@@ -89,7 +89,7 @@ enum armAction {
 };
 
 
-#define GAME_HISTORY 30
+#define GAME_HISTORY 100
 
 bool history[GAME_HISTORY];
 
@@ -754,7 +754,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
           // printf("- BINGO");
         }
       }
-      printf("\n");
+      // printf("\n");
 
 			totalRuns++;
 			printf("Current Accuracy:  %0.4f (%03u of %03u)  (reward=%+0.2f %s)\n", float(successfulGrabs)/float(totalRuns), successfulGrabs, totalRuns, rewardHistory, (rewardHistory >= REWARD_WIN ? "WIN" : "LOSS"));
