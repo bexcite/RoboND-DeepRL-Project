@@ -317,16 +317,20 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
     bool collisionCheck;
 
     // Task #1
-    // collisionCheck = true; // Any touch of the tube by the arm
+    collisionCheck = true; // Any touch of the tube by the arm
 
     // Task #2
+
     // Collision by gripper only
+    /*
     collisionCheck = false;
     if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
+      // Collision with the gripper base
       collisionCheck = true;
       // std::cout << "Collision between[" << contacts->contact(i).collision1()
   		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
     } else {
+      // Collision with other part of the arm so - finish episode and issue the loss
       // rewardHistory = REWARD_WIN/10;
       rewardHistory = REWARD_LOSS;
 
@@ -335,6 +339,7 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
 
       return;
     }
+    */
 
 
 		if (collisionCheck)
