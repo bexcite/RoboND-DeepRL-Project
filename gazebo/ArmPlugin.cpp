@@ -55,7 +55,7 @@
 #define REWARD_LOSS -20.0f // -10.0f - forks for task 1 / -20.f
 
 #define REWARD_ALPHA 0.5f
-#define TASK_ID 2 // 1 or 2
+#define TASK_ID 1 // 1 or 2
 
 // Define Object Names
 #define WORLD_NAME "arm_world"
@@ -318,37 +318,37 @@ void ArmPlugin::onCollisionMsg(ConstContactsPtr &contacts)
     bool collisionCheck = false;
 
 
-    std::cout << "Collision between[" << contacts->contact(i).collision1()
-    	     << "] and [" << contacts->contact(i).collision2() << "]\n";
+    // std::cout << "Collision between[" << contacts->contact(i).collision1()
+    // 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
 
 
 #if TASK_ID == 1
 
       // Task #1 (if only this)
 
-      printf("TASK_ID == 1 ");
+      // printf("TASK_ID == 1 ");
 
       if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0) {
         collisionCheck = true; // Any touch of the tube by the arm
-        printf("-> COLLISION!");
+        // printf("-> COLLISION!");
       }
 
-      printf("\n");
+      // printf("\n");
 
 #elif TASK_ID == 2
 
     // Task #2
     // Collision by gripper only
 
-    printf("TASK_ID == 2 ");
+    // printf("TASK_ID == 2 \n");
 
     // collisionCheck = false;
     if (strcmp(contacts->contact(i).collision1().c_str(), COLLISION_ITEM) == 0) {
       if( strcmp(contacts->contact(i).collision2().c_str(), COLLISION_POINT) == 0 ) {
         // Collision with the gripper base
         collisionCheck = true;
-        std::cout << "Collision between[" << contacts->contact(i).collision1()
-    			     << "] and [" << contacts->contact(i).collision2() << "]\n";
+        // std::cout << "Collision between[" << contacts->contact(i).collision1()
+    		// 	     << "] and [" << contacts->contact(i).collision2() << "]\n";
       } else {
         // Collision with other part of the arm so - finish episode and issue the loss
         // rewardHistory = REWARD_WIN/10;
