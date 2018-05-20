@@ -700,11 +700,11 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 				// compute the smoothed moving average of the delta of the distance to the goal
 				avgGoalDelta  = avgGoalDelta * REWARD_ALPHA + distDelta * (1 - REWARD_ALPHA);
 				// rewardHistory = 2 * avgGoalDelta - 0.05; // this works for Task #1 (TO CHECK)
-        rewardHistory = 2 * avgGoalDelta; // Task #2 experiments 0.2
+        rewardHistory = 2 * avgGoalDelta - 0.05; // Task #2 experiments 0.2
 
-        if (abs(rewardHistory) < 0.001) {
-          rewardHistory -= 0.05;
-        }
+        // if (abs(rewardHistory) < 0.001) {
+        //   rewardHistory -= 0.05;
+        // }
 
 				newReward     = true;
 			}
@@ -758,7 +758,7 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 			totalRuns++;
 			printf("Current Accuracy:  %0.4f (%03u of %03u)  (reward=%+0.2f %s)\n", float(successfulGrabs)/float(totalRuns), successfulGrabs, totalRuns, rewardHistory, (rewardHistory >= REWARD_WIN ? "WIN" : "LOSS"));
-      printf("Local Accuracy: %0.4f (%03u of %03u)\n", float(localAccuracyCnt/actualHistorySize), localAccuracyCnt, actualHistorySize);
+      printf("Local Accuracy: %0.4f (%03u of %03u)\n", float(localAccuracyCnt)/float(actualHistorySize), localAccuracyCnt, actualHistorySize);
 
 
 			for( uint32_t n=0; n < DOF; n++ )
