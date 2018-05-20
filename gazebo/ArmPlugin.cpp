@@ -39,7 +39,7 @@
 #define INPUT_HEIGHT  64
 #define OPTIMIZER "RMSprop"
 // #define OPTIMIZER "Adam"
-#define LEARNING_RATE 0.1f
+#define LEARNING_RATE 0.01f // Task #1 = 0.01f, Task #2 = 0.1f
 #define REPLAY_MEMORY 10000
 #define BATCH_SIZE 32
 #define USE_LSTM true
@@ -726,8 +726,11 @@ void ArmPlugin::OnUpdate(const common::UpdateInfo& updateInfo)
 
 				// compute the smoothed moving average of the delta of the distance to the goal
 				avgGoalDelta  = avgGoalDelta * REWARD_ALPHA + distDelta * (1 - REWARD_ALPHA);
+
+
 				// rewardHistory = 2 * avgGoalDelta - 0.05; // this works for Task #1 (TO CHECK)
-        rewardHistory = 4 * avgGoalDelta - 0.2; // Task #2 experiments 0.2
+
+        rewardHistory = 4 * avgGoalDelta - 0.2; // Task #2 WINNING!
 
         // if (abs(rewardHistory) < 0.001) {
         //   rewardHistory -= 0.05;
